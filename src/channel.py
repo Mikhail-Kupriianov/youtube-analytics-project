@@ -20,11 +20,11 @@ class Channel:
         self.url = self.channel_info.get('items', {})[0].get('snippet', {}).get('thumbnails', {}).get('default',
                                                                                                       {}).get(
             'url')  # - ссылка на канал
-        self.subscriberCount = self.channel_info.get('items', {})[0].get('statistics', {}).get(
+        self.subscriber_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
             'subscriberCount')  # - количество подписчиков
         self.video_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
             'videoCount')  # - количество видео
-        self.viewCount = self.channel_info.get('items', {})[0].get('statistics', {}).get(
+        self.view_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
             'viewCount')  # - общее количество просмотров
 
     @classmethod
