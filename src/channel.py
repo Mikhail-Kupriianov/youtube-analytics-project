@@ -1,7 +1,6 @@
 import os
 from googleapiclient.discovery import build
 
-
 import json
 
 
@@ -20,8 +19,8 @@ class Channel:
         self.url = self.channel_info.get('items', {})[0].get('snippet', {}).get('thumbnails', {}).get('default',
                                                                                                       {}).get(
             'url')  # - ссылка на канал
-        self.subscriber_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
-            'subscriberCount')  # - количество подписчиков
+        self.subscriber_count = int(self.channel_info.get('items', {})[0].get('statistics', {}).get(
+            'subscriberCount'))  # - количество подписчиков
         self.video_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
             'videoCount')  # - количество видео
         self.view_count = self.channel_info.get('items', {})[0].get('statistics', {}).get(
@@ -54,3 +53,27 @@ class Channel:
         #  json_object = json.dumps(self.channel_info, ensure_ascii=False, indent=4)
         with open(file_name, 'w', encoding="utf-8") as file:
             json.dump(self.channel_info, file, ensure_ascii=False, sort_keys=False, indent=4)
+
+    def __str__(self):
+        return f"{self.title}('{self.url}')"
+
+    def __add__(self, other):
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        return self.subscriber_count - other.subscriber_count
+
+    def __gt__(self, other):
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other):
+        return self.subscriber_count >= other.subscriber_count
+
+    def __lt__(self, other):
+        return self.subscriber_count < other.subscriber_count
+
+    def __le__(self, other):
+        return self.subscriber_count <= other.subscriber_count
+
+    def __eq__(self, other):
+        return self.subscriber_count == other.subscriber_count
