@@ -8,7 +8,7 @@ import isodate
 
 
 # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.getenv('YT_API_KEY')
+api_key: str = os.getenv('API_KEY')
 
 # создать специальный объект для работы с API
 youtube = build('youtube', 'v3', developerKey=api_key)
@@ -73,7 +73,8 @@ docs: https://developers.google.com/youtube/v3/docs/videos/list
 video_response = youtube.videos().list(part='contentDetails,statistics',
                                        id=','.join(video_ids)
                                        ).execute()
-# printj(video_response)
+print('вывести длительности видеороликов из плейлиста')
+printj(video_response)
 
 for video in video_response['items']:
     # YouTube video duration is in ISO 8601 format
